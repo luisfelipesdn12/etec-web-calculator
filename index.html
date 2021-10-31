@@ -61,7 +61,7 @@
             <button onclick="clearDisplay()" type="button"
               class="btn btn-dark btn-lg clear font-weight-light">C</button>
             <button onclick="addKey('/')" type="button" class="btn btn-dark btn-lg font-weight-light">/</button>
-            <button onclick="addKey('x')" type="button" class="btn btn-dark btn-lg font-weight-light">x</button>
+            <button onclick="addKey('*')" type="button" class="btn btn-dark btn-lg font-weight-light">x</button>
           </div>
 
           <div class="row">
@@ -107,6 +107,7 @@
     try {
       display.value = eval(display.value);
     } catch (e) {
+      console.error(e);
       display.value = "Erro";
     }
   }
