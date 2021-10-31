@@ -1,0 +1,138 @@
+<html>
+
+<head>
+  <title>Calculadora</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+    integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+  <style>
+    .calculadora {
+      margin-top: 40px;
+      border: solid 1px #000;
+      padding: 20px;
+      background-color: #2E2E2E;
+      border-radius: 10px;
+      box-shadow: 1px 1px 5px #000;
+    }
+
+    .btn {
+      width: 60px;
+      height: 50px;
+      margin: 5px;
+      box-shadow: 1px 1px 1px #000;
+    }
+
+    .clear {
+      width: 130px;
+    }
+
+    .enter {
+      height: 110px;
+    }
+
+    .zero {
+      width: 130px;
+    }
+
+    .resultado {
+      text-align: right;
+      font-size: 20px;
+      margin-top: 10px;
+      margin-bottom: 20px;
+      border: solid 1px #000;
+      box-shadow: 1px 1px 1px #000;
+    }
+  </style>
+</head>
+
+<body style="background: #D9D9D9">
+
+  <div class="container">
+    <div class="row">
+      <div class="col d-flex justify-content-center">
+        <br />
+
+        <div class="calculadora">
+          <input type="text" id="visor" class="form-control resultado" placeholder="0" disabled="disabled" />
+
+          <div class="row">
+            <button onclick="clearDisplay()" type="button"
+              class="btn btn-dark btn-lg clear font-weight-light">C</button>
+            <button onclick="addKey('/')" type="button" class="btn btn-dark btn-lg font-weight-light">/</button>
+            <button onclick="addKey('x')" type="button" class="btn btn-dark btn-lg font-weight-light">x</button>
+          </div>
+
+          <div class="row">
+            <button onclick="addKey('8')" type="button" class="btn btn-dark btn-lg font-weight-light">8</button>
+            <button onclick="addKey('9')" type="button" class="btn btn-dark btn-lg font-weight-light">9</button>
+            <button onclick="addKey('7')" type="button" class="btn btn-dark btn-lg font-weight-light">7</button>
+            <button onclick="addKey('-')" type="button" class="btn btn-dark btn-lg font-weight-light">-</button>
+          </div>
+
+          <div class="row">
+            <button onclick="addKey('4')" type="button" class="btn btn-dark btn-lg font-weight-light">4</button>
+            <button onclick="addKey('5')" type="button" class="btn btn-dark btn-lg font-weight-light">5</button>
+            <button onclick="addKey('6')" type="button" class="btn btn-dark btn-lg font-weight-light">6</button>
+            <button onclick="addKey('+')" type="button" class="btn btn-dark btn-lg font-weight-light">+</button>
+          </div>
+
+          <div class="row">
+            <button onclick="addKey('1')" type="button" class="btn btn-dark btn-lg font-weight-light">1</button>
+            <button onclick="addKey('2')" type="button" class="btn btn-dark btn-lg font-weight-light">2</button>
+            <button onclick="addKey('3')" type="button" class="btn btn-dark btn-lg font-weight-light">3</button>
+            <button onclick="calculate()" type="button" class="btn btn-dark btn-lg enter">=</button>
+          </div>
+
+          <div class="row" style="margin-top: -60px">
+            <button onclick="addKey('0')" type="button" class="btn btn-dark zero btn-lg font-weight-light">0</button>
+            <button onclick="addKey('.')" type="button" class="btn btn-dark btn-lg font-weight-light">.</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+<script>
+  let display = document.getElementById("visor");
+
+  function clearDisplay() {
+    display.value = "0";
+  }
+
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch (e) {
+      display.value = "Erro";
+    }
+  }
+
+  function addKey(key) {
+    if (display.value == "0" || display.value == "Erro") {
+      display.value = key;
+    } else {
+      display.value += key;
+    }
+  }
+
+  document.onkeyup = () => {
+    const key = event.key;
+    const allowedKeys = "/x-+1234567890.";
+
+    if (allowedKeys.includes(key)) {
+      addKey(key);
+    } else if (key == "Enter" || key == "=") {
+      calculate();
+    } else if (key == "c" || key == "C") {
+      clearDisplay();
+    } else if (key == "Backspace") {
+      display.value = display.value.substring(0, display.value.length - 1);
+    }
+  };
+</script>
+
+</html>
